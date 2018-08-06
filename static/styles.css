@@ -1,0 +1,19 @@
+.tagify.input {
+	height: auto;
+}
+
+.tagify .tagify__input::before {
+	content:'\feff';
+}
+
+.input-span {
+	min-width: 110px;
+}
+
+.input-span::before {
+	content: '\feff';
+}
+
+.input-span:focus {
+	outline: 0px solid transparent;
+}

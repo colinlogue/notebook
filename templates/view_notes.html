@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block columns %}
+<div class="column is-half-desktop is-offset-one-quarter-desktop">
+	{% for note in notes %}
+	<div class="level">
+		<p>{{ note.text }}</p>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

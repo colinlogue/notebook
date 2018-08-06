@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block columns %}
+<div class="column is-half-desktop is-offset-one-quarter-desktop">
+
+	{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+	{% endif %}
+
+	<form method="POST" action="{{ url_for('add_note') }}">
+		{{ form.csrf_token }}
+		<div class="field">
+			<label class="label" for="title">Title</label>
+			<div class="control">
+				<input class="input" type="text" name="title">
+			</div>
+		</div>
+		<div class="field">
+			<label class="label" for="text">Text</label>
+			<div class="control">
+				<textarea class="textarea" name="text"></textarea>
+			</div>
+		</div>
+		<div class="field">
+			<label class="label is-small" for="tags">Tags</label>
+			<div class="control">
+				<input type="text" class="input is-small" name="tags">
+			</div>
+		</div>
+		<div class="field">
+			<label class="label is-small" for="url">URL</label>
+			<div class="control">
+				<div class="input is-small" name="url" placeholder="https://">
+					<span class="url-field-https">https://</span>
+					<span class="input-span" spellcheck="false" contenteditable></span>
+				</div>
+			</div>
+		</div>
+		<div class="control">
+			<button class="button is-link">Add note</button>
+		</div>
+	</form>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tagify.css') }}">
+<script src="{{ url_for('static', filename='tagify.js') }}"></script>
+<script src="{{ url_for('static', filename='tags.js') }}"></script>
+
+{% endblock %}
