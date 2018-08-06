@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block singlecol %}
+	{% for note in notes %}
+	<div class="level">
+		{% include 'notes/display.html' %}
+	</div>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,26 @@
+
+
+
+<div class="note-displa box">
+	{% if note.title %}
+	<h3 class="note-title title is-3">{{note.title}}</h3>
+	{% endif %}
+
+	<div class="note-text">
+		{% autoescape false %}
+		<p>{{ note.text|note_text_to_html }}</p>
+		{% endautoescape %}
+	</div>
+
+	<ul class="note-tags">
+		{% for tag in note.tags %}
+		<li class="note-tag">{{tag}}</li>
+		{% endfor %}
+	</ul>
+
+	{% if note.url %}
+	<div class="note-url">
+		<a href="https://{{note.url}}">https://{{note.url}}</a>
+	</div>
+	{% endif %}
+</div>

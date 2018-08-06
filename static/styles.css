@@ -17,3 +17,12 @@
 .input-span:focus {
 	outline: 0px solid transparent;
 }
+
+body {
+	margin-left: 1.4em;
+	margin-right: 1.4em;
+}
+
+.note-display .note-text {
+	text-align: justify;
+}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block singlecol %}
+
+{% if form.errors %}
+<ul class="errors">
+    {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+            <li>{{ form[field_name].label }}: {{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="POST" action="{{ url_for('add_note') }}">
+	{{ form.csrf_token }}
+	<div class="field">
+		<label class="label" for="title">Title</label>
+		<div class="control">
+			<input class="input" type="text" name="title">
+		</div>
+	</div>
+	<div class="field">
+		<label class="label" for="text">Text</label>
+		<div class="control">
+			<textarea id="mdtext" class="textarea" name="text"></textarea>
+		</div>
+	</div>
+	<div class="field">
+		<label class="label is-small" for="tags">Tags</label>
+		<div class="control">
+			<input type="text" class="input is-small" name="tags">
+		</div>
+	</div>
+	<div class="field">
+		<label class="label is-small" for="url">URL</label>
+		<div class="control">
+			<div class="input is-small" name="url" placeholder="https://">
+				<span class="url-field-https">https://</span>
+				<span class="input-span" spellcheck="false" contenteditable></span>
+			</div>
+		</div>
+	</div>
+	<div class="control">
+		<button class="button is-link">Add note</button>
+	</div>
+</form>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tagify.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE({ element: document.getElementById("mdtext") });
+</script>
+<script src="{{ url_for('static', filename='tagify.js') }}"></script>
+<script src="{{ url_for('static', filename='tags.js') }}"></script>
+
+
+<style>
+	/* fix line spacing to work with simplemde and bulma */
+	.content pre:not(:last-child).CodeMirror-line {
+		margin-bottom: 0;
+	}
+	/* make editor buttons smaller */
+	.editor-toolbar {
+		font-size: 0.7em;
+	}
+	.editor-toolbar:before {
+		margin-bottom: 0;
+	}
+	.editor-toolbar:after {
+		margin-top: 0;
+	}
+</style>
+
+{% endblock %}

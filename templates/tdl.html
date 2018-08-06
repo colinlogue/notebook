@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block singlecol %}
+
+<div class="panel">
+	<div class="panel-heading is-primary">To Do List</div>
+
+	{% for item in items %}
+	<label class="panel-block">
+		<input type="checkbox" {% if item.done %} checked {%endif%} >
+		{{ item.label }}
+	</label>
+	{% endfor %}
+
+	<div class="panel-block">
+		<button class="button is-link is-outlined is-fullwidth">
+			update TDL
+		</button>
+	</div>
+</div>
+
+{% endblock %}
