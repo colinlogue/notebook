@@ -26,3 +26,7 @@ body {
 .note-display .note-text {
 	text-align: justify;
 }
+
+.page-content {
+	margin-top: 1.5em;
+}

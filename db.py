@@ -1,8 +1,10 @@
+from flask_pymongo import PyMongo
 from pymongo import ReturnDocument
 
 
 
-
+mongo = PyMongo()
+notebook_db = mongo.db
 
 
 def get_next_seq_val(db, seq_name):

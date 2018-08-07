@@ -50,7 +50,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.js"></script>
 <script>
-var simplemde = new SimpleMDE({ element: document.getElementById("mdtext") });
+var simplemde = new SimpleMDE({
+	element: document.getElementById("mdtext"),
+	spellChecker: false,});
 </script>
 <script src="{{ url_for('static', filename='tagify.js') }}"></script>
 <script src="{{ url_for('static', filename='tags.js') }}"></script>
@@ -73,4 +75,11 @@ var simplemde = new SimpleMDE({ element: document.getElementById("mdtext") });
 	}
 </style>
 
+{% endblock %}
+
+
+
+{% block breadcrumbs %}
+<li><a href="{{ url_for('view_notes') }}">Notes</a></li>
+<li class="is-active"><a href="{{ url_for('add_note') }}">New</a></li>
 {% endblock %}

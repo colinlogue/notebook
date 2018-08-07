@@ -8,11 +8,20 @@
 	</head>
 	<body>
 		{% block body %}
-		<div class="content">
+		<div class="page-content">
 			{% block content %}
 			<div class="columns">
 				{% block columns %}
 				<div class="column is-half-desktop is-offset-one-quarter-desktop is-8-tablet is-offset-2-tablet">
+					{% block navbar %}
+					<nav class="breadcrumb">
+						<ul>
+							<li id="home_nav_li"><a href="{{ url_for('home') }}">Home</a></li>
+							{% block breadcrumbs %}
+							{% endblock %}
+						</ul>
+					</nav>
+					{% endblock %}
 					{% block singlecol %}
 					{% endblock %}
 				</div>
