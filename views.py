@@ -1,26 +1,22 @@
 import datetime
 
 from flask import render_template, redirect, Blueprint
-from flask_pymongo import PyMongo
 
-from .db import mongo
+from .db import mongo, ASCENDING, DESCENDING, get_next_seq_val
+from .forms import NoteForm
 
 
 
 notebook = Blueprint('notebook', __name__,
-						templat_folder='templates',
+						template_folder='templates',
 						static_folder='static')
-
-### constants ###
-ASCENDING = 1
-DESCENDING = -1
 
 ### app routes ###
 @notebook.route('/')
 def home():
 	"""Displays all notes from notebook"""
 	notes = mongo.db.notebook.find().sort('_id', DESCENDING)
-	return render_template('notes/view.html', notes=notes)
+	return render_template('notebook/view.html', notes=notes)
 
 @notebook.route('/add', methods=['GET', 'POST'])
 def add_note():
@@ -41,18 +37,18 @@ def add_note():
 			note['tags'] = [t.strip('\"') for t in form.tags.data.split(',')]
 
 		mongo.db.notebook.insert_one(note)
-		return redirect('/notes/view')
+		return redirect('/notebook/view')
 
-	return render_template('notes/new.html', form=form)
+	return render_template('notebook/new.html', form=form)
 
 @notebook.route('/view/<note_id>')
 def view_notes():
 	"""Displays a single from notebook"""
 	notes = mongo.db.notebook.find_one({'_id':note_id}).sort('_id', DESCENDING)
-	return render_template('notes/view.html', notes=notes)
+	return render_template('notebook/view.html', notes=notes)
 
 @notebook.route('/tdl')
 def tdl():
 	"""Displays the TDL page."""
 	items = mongo.db.to_do_list.find({})
-	return render_template('tdl.html', items=items)
+	return render_template('notebook/tdl.html', items=items)

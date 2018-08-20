@@ -3,12 +3,12 @@
 {% block singlecol %}
 	{% for note in notes %}
 	<div class="level">
-		{% include 'notes/display.html' %}
+		{% include 'notebook/display.html' %}
 	</div>
 	{% endfor %}
 {% endblock %}
 
 
 {% block breadcrumbs %}
-<li class="is-active"><a href="{{ url_for('view_notes') }}">Notes</a></li>
+<li class="is-active"><a href="{{ url_for('.home') }}">Notes</a></li>
 {% endblock %}

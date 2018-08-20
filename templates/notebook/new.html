@@ -12,7 +12,7 @@
 </ul>
 {% endif %}
 
-<form method="POST" action="{{ url_for('add_note') }}">
+<form method="POST" action="{{ url_for('.add_note') }}">
 	{{ form.csrf_token }}
 	<div class="field">
 		<label class="label" for="title">Title</label>
@@ -80,6 +80,6 @@ var simplemde = new SimpleMDE({
 
 
 {% block breadcrumbs %}
-<li><a href="{{ url_for('view_notes') }}">Notes</a></li>
-<li class="is-active"><a href="{{ url_for('add_note') }}">New</a></li>
+<li><a href="{{ url_for('.home') }}">Notes</a></li>
+<li class="is-active"><a href="{{ url_for('.add_note') }}">New</a></li>
 {% endblock %}
